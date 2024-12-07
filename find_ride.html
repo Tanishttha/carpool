@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Available Rides</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Additional CSS for animations and improvements */
+    .ride-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .ride-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+    .btn-filter:hover {
+      background-color: #4b5563;
+      color: white;
+    }
+    .filter-btn:active {
+      transform: scale(0.98);
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-gray-100 via-blue-50 to-blue-100 min-h-screen">
+  <!-- Header -->
+  <header class="bg-gradient-to-r from-blue-600 to-indigo-600 shadow-lg p-8 text-white text-center">
+    <h1 class="text-5xl font-extrabold">Available Rides</h1>
+    <p class="mt-2 text-lg">Choose a ride that suits you best in Faridabad, Delhi NCR!</p>
+  </header>
+
+  <!-- Filter Section -->
+  <section class="container mx-auto mt-12 px-4 text-center">
+    <h2 class="text-3xl font-semibold text-gray-800 mb-6">Filter Rides</h2>
+    <div class="flex justify-center space-x-6">
+      <!-- Cost Filter -->
+      <select id="costFilter" class="px-4 py-2 border rounded-lg bg-white shadow-md text-gray-700">
+        <option value="">Filter by Cost</option>
+        <option value="low">Low (₹0 - ₹100)</option>
+        <option value="medium">Medium (₹100 - ₹300)</option>
+        <option value="high">High (₹300+)</option>
+      </select>
+      <!-- Arrival Time Filter -->
+      <select id="timeFilter" class="px-4 py-2 border rounded-lg bg-white shadow-md text-gray-700">
+        <option value="">Filter by Arrival Time</option>
+        <option value="short">Short (0-10 mins)</option>
+        <option value="medium">Medium (10-20 mins)</option>
+        <option value="long">Long (20+ mins)</option>
+      </select>
+      <!-- Apply Filters Button -->
+      <button id="applyFilter" class="px-6 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition-all filter-btn">Apply Filters</button>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container mx-auto mt-12 px-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="rideContainer">
+      <!-- Ride 1 -->
+      <div class="ride-card bg-white rounded-lg shadow-md p-6 border-t-4 border-blue-500" data-cost="low" data-time="short">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-2">Sector 14, Gurugram</h2>
+        <p class="text-gray-600">🚗 Driver: Rajesh Kumar</p>
+        <p class="text-gray-600">⭐ Rating: 4.9</p>
+        <p class="text-gray-600">💰 Fare: ₹90</p>
+        <p class="text-gray-600">⏱ Arrival: 10 mins</p>
+        <div class="mt-6 flex justify-between">
+          <button class="px-6 py-2 bg-blue-500 text-white rounded shadow-md hover:bg-blue-600">Request Ride</button>
+          <a href="driver_details.html" class="px-6 py-2 bg-gray-200 text-gray-800 rounded shadow-md hover:bg-gray-300">Driver Details</a>
+        </div>
+      </div>
+
+      <!-- Ride 2 -->
+      <div class="ride-card bg-white rounded-lg shadow-md p-6 border-t-4 border-teal-500" data-cost="low" data-time="medium">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-2">Sector 21, Gurugram</h2>
+        <p class="text-gray-600">🚗 Driver: Priya Sharma</p>
+        <p class="text-gray-600">⭐ Rating: 4.8</p>
+        <p class="text-gray-600">💰 Fare: ₹80</p>
+        <p class="text-gray-600">⏱ Arrival: 12 mins</p>
+        <div class="mt-6 flex justify-between">
+          <button class="px-6 py-2 bg-teal-500 text-white rounded shadow-md hover:bg-teal-600">Request Ride</button>
+          <a href="driver_details.html" class="px-6 py-2 bg-gray-200 text-gray-800 rounded shadow-md hover:bg-gray-300">Driver Details</a>
+        </div>
+      </div>
+
+      <!-- Ride 3 -->
+      <div class="ride-card bg-white rounded-lg shadow-md p-6 border-t-4 border-purple-500" data-cost="medium" data-time="short">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-2">Sector 56, Gurugram</h2>
+        <p class="text-gray-600">🚗 Driver: Ankit Verma</p>
+        <p class="text-gray-600">⭐ Rating: 5.0</p>
+        <p class="text-gray-600">💰 Fare: ₹100</p>
+        <p class="text-gray-600">⏱ Arrival: 8 mins</p>
+        <div class="mt-6 flex justify-between">
+          <button class="px-6 py-2 bg-purple-500 text-white rounded shadow-md hover:bg-purple-600">Request Ride</button>
+          <a href="driver_details.html" class="px-6 py-2 bg-gray-200 text-gray-800 rounded shadow-md hover:bg-gray-300">Driver Details</a>
+        </div>
+      </div>
+
+      <!-- Ride 4 -->
+      <div class="ride-card bg-white rounded-lg shadow-md p-6 border-t-4 border-red-500" data-cost="high" data-time="long">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-2">Sector 45, Gurugram</h2>
+        <p class="text-gray-600">🚗 Driver: Neha Singh</p>
+        <p class="text-gray-600">⭐ Rating: 4.7</p>
+        <p class="text-gray-600">💰 Fare: ₹370</p>
+        <p class="text-gray-600">⏱ Arrival: 15 mins</p>
+        <div class="mt-6 flex justify-between">
+          <button class="px-6 py-2 bg-red-500 text-white rounded shadow-md hover:bg-red-600">Request Ride</button>
+          <a href="driver_details.html" class="px-6 py-2 bg-gray-200 text-gray-800 rounded shadow-md hover:bg-gray-300">Driver Details</a>
+        </div>
+      </div>
+
+      <!-- Ride 5 -->
+      <div class="ride-card bg-white rounded-lg shadow-md p-6 border-t-4 border-yellow-500" data-cost="low" data-time="short">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-2">Sector 31, Gurugram</h2>
+        <p class="text-gray-600">🚗 Driver: Arjun Yadav</p>
+        <p class="text-gray-600">⭐ Rating: 4.6</p>
+        <p class="text-gray-600">💰 Fare: ₹70</p>
+        <p class="text-gray-600">⏱ Arrival: 9 mins</p>
+        <div class="mt-6 flex justify-between">
+          <button class="px-6 py-2 bg-yellow-500 text-white rounded shadow-md hover:bg-yellow-600">Request Ride</button>
+          <a href="driver_details.html" class="px-6 py-2 bg-gray-200 text-gray-800 rounded shadow-md hover:bg-gray-300">Driver Details</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-200 text-center p-6 mt-8 shadow-inner">
+    <p class="text-gray-700 text-sm">© 2024 Ride Finder. Your trusted ride partner for Gurugram to College!</p>
+  </footer>
+
+  <script>
+    // Filter logic to show and hide rides based on cost and time
+    document.getElementById('applyFilter').addEventListener('click', function() {
+      const costFilter = document.getElementById('costFilter').value;
+      const timeFilter = document.getElementById('timeFilter').value;
+      const rides = document.querySelectorAll('.ride-card');
+      
+      rides.forEach(function(ride) {
+        const rideCost = ride.getAttribute('data-cost');
+        const rideTime = ride.getAttribute('data-time');
+        
+        const showByCost = costFilter ? rideCost === costFilter : true;
+        const showByTime = timeFilter ? rideTime === timeFilter : true;
+        
+        if (showByCost && showByTime) {
+          ride.style.display = 'block';
+        } else {
+          ride.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+

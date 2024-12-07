@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carpooling Messenger with Bargain Fare</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.0.0/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9fafb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Main Container */
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        /* Header */
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            font-size: 1.25rem;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 15px 15px 0 0;
+        }
+
+        /* Chat Area */
+        .chat-container {
+            flex-grow: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 15px;
+            height: 60vh;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        /* Message Styles */
+        .chat-message {
+            padding: 12px 18px;
+            border-radius: 25px;
+            max-width: 70%;
+            position: relative;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .chat-message.rider {
+            background-color: #3b82f6;
+            color: white;
+            align-self: flex-start;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .chat-message.driver {
+            background-color: #10b981;
+            color: white;
+            align-self: flex-end;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        .status {
+            position: absolute;
+            bottom: -18px;
+            font-size: 0.75rem;
+        }
+
+        .status.sent {
+            color: #fbbf24;
+        }
+
+        .status.read {
+            color: #4ade80;
+        }
+
+        .status.offline {
+            color: #f87171;
+        }
+
+        .status.online {
+            color: #34d399;
+        }
+
+        /* Input and Send Button */
+        .input-container {
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f9fafb;
+            border-top: 1px solid #e5e7eb;
+            border-radius: 0 0 15px 15px;
+        }
+
+        .message-input {
+            width: 80%;
+            padding: 12px;
+            border-radius: 25px;
+            border: 1px solid #ccc;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .message-input:focus {
+            border-color: #4CAF50;
+        }
+
+        .send-button {
+            background-color: #4CAF50;
+            padding: 12px 16px;
+            color: white;
+            font-weight: bold;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .send-button:hover {
+            transform: scale(1.1);
+        }
+
+        /* Bargain Section */
+        .bargain-section {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f0f9ff;
+            border-radius: 15px;
+        }
+
+        .bargain-section input {
+            padding: 10px;
+            border-radius: 15px;
+            width: 40%;
+            border: 1px solid #ddd;
+        }
+
+        .bargain-section button {
+            padding: 10px 15px;
+            background-color: #10b981;
+            border-radius: 15px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .bargain-section button:hover {
+            background-color: #4CAF50;
+        }
+
+        /* Notification Animation */
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateX(50px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">Carpooling Messenger</div>
+
+        <!-- Chat Area -->
+        <div class="chat-container" id="chatContainer">
+            <!-- Messages will appear here -->
+        </div>
+
+        <!-- Bargain Fare Section -->
+        <div class="bargain-section">
+            <label for="bargainInput">Propose a Fare:</label>
+            <input type="number" id="bargainInput" placeholder="Enter fare">
+            <button onclick="bargainFare()">Propose Fare</button>
+        </div>
+
+        <!-- Input Area -->
+        <div class="input-container">
+            <input type="text" id="messageInput" class="message-input" placeholder="Type a message..." onkeyup="sendMessage(event)">
+            <button class="send-button" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        let isRider = true;  // Assume the user is the rider for now
+        let messages = [];
+        let driverOnline = true; // Simulating driver status (online or offline)
+        let currentFare = 100; // Initial fare
+        let driverBargainAccepted = false;
+
+        // Function to play sound
+        function playSound() {
+            let audio = new Audio('https://www.soundjay.com/button/beep-07.wav');
+            audio.play();
+        }
+
+        // Function to send message
+        function sendMessage(event) {
+            if (event && event.key !== 'Enter') return;
+
+            const messageText = document.getElementById('messageInput').value.trim();
+            if (!messageText) return;
+
+            // Add message to messages array with sent status
+            messages.push({
+                text: messageText,
+                sender: isRider ? 'rider' : 'driver',
+                status: 'sent',
+                readStatus: 'unread'
+            });
+
+            // Switch the sender for next message
+            isRider = !isRider;
+
+            document.getElementById('messageInput').value = '';
+            renderMessages();
+            playSound();
+        }
+
+        // Function to render chat messages
+        function renderMessages() {
+            const chatContainer = document.getElementById('chatContainer');
+            chatContainer.innerHTML = ''; // Clear existing messages
+
+            messages.forEach((msg, index) => {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('chat-message', msg.sender);
+
+                // Display message text
+                messageElement.textContent = msg.text;
+
+                // Add status
+                const statusElement = document.createElement('div');
+                statusElement.classList.add('status');
+                if (msg.status === 'sent') {
+                    statusElement.textContent = 'Sent';
+                    statusElement.classList.add('sent');
+                    // Simulate message read after some time
+                    setTimeout(() => {
+                        msg.status = 'read';
+                        msg.readStatus = 'read';
+                        renderMessages();
+                    }, 2000); // 2 seconds for message to be read
+                }
+
+                if (msg.readStatus === 'read') {
+                    statusElement.textContent = 'Read';
+                    statusElement.classList.add('read');
+                }
+
+                // Show driver online/offline status
+                if (msg.sender === 'driver') {
+                    const onlineStatus = driverOnline ? 'online' : 'offline';
+                    const onlineElement = document.createElement('div');
+                    onlineElement.textContent = `Driver is ${onlineStatus}`;
+                    onlineElement.classList.add('status', onlineStatus);
+                    messageElement.appendChild(onlineElement);
+                }
+
+                messageElement.appendChild(statusElement);
+                chatContainer.appendChild(messageElement);
+            });
+
+            // Scroll to the latest message
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // Function for fare bargaining
+        function bargainFare() {
+            const proposedFare = parseInt(document.getElementById('bargainInput').value);
+            if (isNaN(proposedFare)) {
+                alert("Please enter a valid fare.");
+                return;
+            }
+
+            if (proposedFare < currentFare) {
+                alert(`Driver has declined the fare of ₹${proposedFare}`);
+                currentFare = proposedFare;
+                document.getElementById('bargainInput').value = '';
+                renderMessages();
+            } else {
+                alert(`Driver has accepted the fare of ₹${proposedFare}`);
+                currentFare = proposedFare;
+                messages.push({
+                    text: `Fare agreed upon: ₹${currentFare}`,
+                    sender: 'driver',
+                    status: 'sent',
+                    readStatus: 'unread'
+                });
+                renderMessages();
+            }
+        }
+
+        // Initial render
+        renderMessages();
+    </script>
+</body>
+</html>
+
+
+

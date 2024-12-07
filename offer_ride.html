@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offer a Ride</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom Animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideDown {
+            0% {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        .slide-down {
+            animation: slideDown 0.4s ease-in-out forwards;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-blue-100 via-white to-gray-100 min-h-screen font-sans antialiased">
+
+    <!-- Main Container -->
+    <div class="flex justify-center items-center h-screen px-4">
+        <!-- Card -->
+        <div class="bg-white shadow-2xl rounded-lg w-full max-w-lg p-8 fade-in">
+            <!-- Header -->
+            <h1 class="text-3xl font-extrabold text-center text-blue-700 mb-6">🚗 Offer a Ride</h1>
+
+            <!-- Ride Offer Form -->
+            <form id="rideForm" class="space-y-6">
+
+                <!-- Ride Frequency -->
+                <div>
+                    <label for="rideFrequency" class="block text-gray-700 font-semibold mb-1">Ride Frequency</label>
+                    <select id="rideFrequency" class="w-full border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500 hover:shadow-md transition duration-200">
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly</option>
+                    </select>
+                </div>
+
+                <!-- Ride Mode -->
+                <div>
+                    <label for="rideMode" class="block text-gray-700 font-semibold mb-1">Ride Mode</label>
+                    <select id="rideMode" class="w-full border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500 hover:shadow-md transition duration-200">
+                        <option value="toUniversity">To University</option>
+                        <option value="fromUniversity">From University</option>
+                    </select>
+                </div>
+
+                <!-- Ride Date -->
+                <div>
+                    <label for="rideDate" class="block text-gray-700 font-semibold mb-1">Ride Date</label>
+                    <input type="date" id="rideDate" class="w-full border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500 hover:shadow-md transition duration-200">
+                </div>
+
+                <!-- Ride Timing -->
+                <div>
+                    <label for="rideTime" class="block text-gray-700 font-semibold mb-1">Ride Timing</label>
+                    <input type="time" id="rideTime" class="w-full border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500 hover:shadow-md transition duration-200">
+                </div>
+
+                <!-- Home Area -->
+                <div>
+                    <label for="homeArea" class="block text-gray-700 font-semibold mb-1">Home Area</label>
+                    <input type="text" id="homeArea" placeholder="Enter your area" class="w-full border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500 hover:shadow-md transition duration-200">
+                </div>
+
+                <!-- Exact Location -->
+                <div>
+                    <label for="location" class="block text-gray-700 font-semibold mb-1">Exact Location</label>
+                    <input type="text" id="location" placeholder="Enter your exact location" class="w-full border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500 hover:shadow-md transition duration-200">
+                </div>
+
+                <!-- Offer Ride Button -->
+                <button type="button" id="offerRideBtn" class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg shadow-lg hover:bg-blue-700 hover:shadow-xl transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-400 transition duration-300">
+                    Offer Ride
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Ride Offered Popup -->
+    <div id="popup" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+        <div class="bg-white p-6 rounded-lg shadow-lg text-center slide-down">
+            <h2 class="text-2xl font-bold text-green-600 mb-4">🎉 Ride Successfully Offered!</h2>
+            <p class="text-gray-700">Thank you for offering a ride. You will be notified of any requests.</p>
+            <button id="closePopupBtn" class="mt-4 bg-blue-600 text-white py-2 px-4 rounded-lg shadow-lg hover:bg-blue-700 transform hover:scale-105 focus:ring-4 focus:ring-blue-400 transition duration-300">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Handle Offer Ride Button Click
+        document.getElementById('offerRideBtn').addEventListener('click', function () {
+            // Show Popup with Animation
+            document.getElementById('popup').classList.remove('hidden');
+        });
+
+        // Handle Close Popup Button Click
+        document.getElementById('closePopupBtn').addEventListener('click', function () {
+            // Hide Popup
+            document.getElementById('popup').classList.add('hidden');
+        });
+    </script>
+
+</body>
+
+</html>
+
+

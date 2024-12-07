@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carpooling AI Alerts</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header {
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      padding: 1em 0;
+      font-size: 24px;
+    }
+
+    .container {
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    .alert-box {
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      background: #f9f9f9;
+      display: none;
+    }
+
+    .alert-box.weather {
+      border-left: 5px solid #2196F3;
+    }
+
+    .alert-box.traffic {
+      border-left: 5px solid #FF9800;
+    }
+
+    .alert-box .title {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .alert-box .message {
+      font-size: 14px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 10px 15px;
+      background-color: #4CAF50;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">AI-Powered Traffic & Weather Alerts</div>
+  <div class="container">
+    <h2>Check for Alerts</h2>
+    <p>Click the button below to get real-time traffic and weather updates for your route.</p>
+    <button class="button" onclick="getAlerts()">Get AI Alerts</button>
+
+    <div class="alert-box weather" id="weather-alert">
+      <div class="title">Weather Alert</div>
+      <div class="message"></div>
+    </div>
+
+    <div class="alert-box traffic" id="traffic-alert">
+      <div class="title">Traffic Alert</div>
+      <div class="message"></div>
+    </div>
+  </div>
+
+  <script>
+    function getAlerts() {
+  const openWeatherApiKey = '05636943fe4ff91f0838ff7ebdf91ce8'; // Replace with your actual API key
+  const city = 'London'; // Example city, replace with dynamic input if needed
+  const trafficApiUrl = 'https://api.trafficservice.com/v1/alerts'; // Replace with your traffic API endpoint
+  const weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${openWeatherApiKey}&units=metric`;
+
+  // Fetch weather data
+  fetch(weatherApiUrl)
+    .then(response => response.json())
+    .then(data => {
+      const weatherAlertBox = document.getElementById('weather-alert');
+      const weatherDescription = data.weather[0].description; // Get the weather description
+      const weatherMessage = `Weather: ${weatherDescription}, Temperature: ${data.main.temp}°C`;
+      
+      weatherAlertBox.querySelector('.message').textContent = weatherMessage;
+      weatherAlertBox.style.display = 'block';
+    })
+    .catch(error => {
+      console.error('Weather API Error:', error);
+      const weatherAlertBox = document.getElementById('weather-alert');
+      weatherAlertBox.querySelector('.message').textContent = 'Unable to fetch weather data.';
+      weatherAlertBox.style.display = 'block';
+    });
+
+  // Fetch traffic data
+  fetch(trafficApiUrl)
+    .then(response => response.json())
+    .then(data => {
+      const trafficAlertBox = document.getElementById('traffic-alert');
+      const trafficMessage = data.alerts.length > 0 
+        ? `Traffic Alert: ${data.alerts[0].message}` 
+        : "No traffic alerts. All roads clear.";
+        
+      trafficAlertBox.querySelector('.message').textContent = trafficMessage;
+      trafficAlertBox.style.display = 'block';
+    })
+    .catch(error => {
+      console.error('Traffic API Error:', error);
+      const trafficAlertBox = document.getElementById('traffic-alert');
+      trafficAlertBox.querySelector('.message').textContent = 'Unable to fetch traffic data.';
+      trafficAlertBox.style.display = 'block';
+    });
+}
+
+  </script>
+</body>
+</html>

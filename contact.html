@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | College Carpooling</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <style>
+        /* Custom 3D effect */
+        .card {
+            perspective: 1000px;
+        }
+
+        .card-inner {
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+
+        .card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+        }
+
+        .card-front {
+            background: #1c3d5a;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+        }
+
+        .card-back {
+            background: #f1f1f1;
+            color: #333;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Custom popup style */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .popup-button {
+            background-color: #1c3d5a;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .popup-button:hover {
+            background-color: #055076;
+        }
+
+        /* Make the text bold and enhance headings */
+        .bold-text {
+            font-weight: 700;
+        }
+
+        .section-heading {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1c3d5a;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-field {
+            border-radius: 8px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            width: 100%;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        .submit-button {
+            background-color: #1c3d5a;
+            color: white;
+            padding: 15px 25px;
+            width: 100%;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: background-color 0.3s;
+        }
+
+        .submit-button:hover {
+            background-color: #055076;
+        }
+
+        .rating-input {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Header Section -->
+    <header class="bg-blue-900 text-white p-6">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl font-bold">Contact Us</h1>
+            <p class="mt-2 text-lg font-bold">We're here to help with your carpooling needs. Reach out to us for any queries or support.</p>
+        </div>
+    </header>
+
+    <!-- University Logo Section -->
+    <section class="mt-8 text-center">
+        <img src="https://jcboseust.ac.in/assets/uploads/media/be5cb2dc7f8445c5b3dc7d814be25bc9.png" alt="J.C. Bose University Logo" class="mx-auto h-12 w-auto mb-4">
+    </section>
+
+    <!-- Contact Information Section -->
+    <section class="container mx-auto p-6 bg-white shadow-lg rounded-lg mt-8">
+        <h2 class="section-heading text-center">Contact Information</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-4">
+                <p class="bold-text"><strong>Phone:</strong> +123-456-7890 (Carpooling Helpline)</p>
+                <p class="bold-text"><strong>Email:</strong> <a href="mailto:carpool@college.edu" class="text-blue-600">carpool@college.edu</a></p>
+                <p class="bold-text"><strong>Social Media:</strong></p>
+                <div class="flex gap-4 justify-center">
+                    <a href="https://facebook.com/collegecarpool" class="text-blue-600 hover:text-blue-800 transition duration-300"><i class="fab fa-facebook-f"></i> Facebook</a>
+                    <a href="https://instagram.com/collegecarpool" class="text-pink-600 hover:text-pink-800 transition duration-300"><i class="fab fa-instagram"></i> Instagram</a>
+                    <a href="https://twitter.com/collegecarpool" class="text-blue-400 hover:text-blue-600 transition duration-300"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="https://linkedin.com/company/collegecarpool" class="text-blue-700 hover:text-blue-900 transition duration-300"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                </div>
+            </div>
+
+            <!-- Suggestion Form & Rating -->
+            <div class="space-y-4">
+                <h3 class="text-xl font-semibold">Suggestions for Improvement</h3>
+                <textarea class="input-field" placeholder="Your suggestions..."></textarea>
+                
+                <h3 class="text-xl font-semibold">Rate Your Experience</h3>
+                <div class="flex items-center space-x-2">
+                    <label class="rating-input"><input type="radio" name="rating" value="1" class="form-radio text-yellow-500"> 1</label>
+                    <label class="rating-input"><input type="radio" name="rating" value="2" class="form-radio text-yellow-500"> 2</label>
+                    <label class="rating-input"><input type="radio" name="rating" value="3" class="form-radio text-yellow-500"> 3</label>
+                    <label class="rating-input"><input type="radio" name="rating" value="4" class="form-radio text-yellow-500"> 4</label>
+                    <label class="rating-input"><input type="radio" name="rating" value="5" class="form-radio text-yellow-500"> 5</label>
+                </div>
+                
+                <!-- Submit Button -->
+                <button id="submitFeedback" class="submit-button">Submit Feedback</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Policy Link -->
+    <section class="text-center mt-8">
+        <p class="text-sm text-gray-600 font-semibold">
+            <a href="/privacy-policy.html" class="text-blue-600 underline">Privacy Policy</a>
+        </p>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-blue-900 text-white text-center p-4 mt-8">
+        <p>&copy; 2024 College Carpooling | J.C. Bose University</p>
+    </footer>
+
+    <!-- Popup Thank You -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <h2 class="text-2xl font-bold text-blue-900">Thank You for Your Feedback!</h2>
+            <p class="mt-2 text-lg">We appreciate your suggestions and rating. We'll work on improving the carpooling experience.</p>
+            <button class="popup-button mt-4" onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to show the Thank You popup
+        document.getElementById('submitFeedback').addEventListener('click', function() {
+            document.getElementById('popup').style.display = 'flex';
+        });
+
+        // Function to close the popup
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>

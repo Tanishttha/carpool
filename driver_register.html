@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Registration and Ride Offering Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Quicksand", sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            width: 100%;
+            background: linear-gradient(135deg, #1e3c72, #2a5298); /* Updated blue gradient background */
+            padding: 40px 20px;
+            animation: backgroundAnimation 10s ease-in-out infinite; /* Animation on background */
+        }
+
+        @keyframes backgroundAnimation {
+            0% { background: linear-gradient(135deg, #1e3c72, #2a5298); }
+            50% { background: linear-gradient(135deg, #2a5298, #1e3c72); }
+            100% { background: linear-gradient(135deg, #1e3c72, #2a5298); }
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: 45% 55%;
+            place-items: center;
+            background: #f6f6f6;
+            width: min(700px, 95%);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Left Side */
+        .left-side {
+            height: 100%;
+            width: 100%;
+            background-image: url('taxi.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            pointer-events: none;
+            border-radius: 20px 0 0 20px;
+            transition: all 0.5s ease-in-out;
+        }
+
+        /* Right Side */
+        .right-side {
+            padding: 40px;
+        }
+
+        /* Form Heading */
+        .form-heading {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 12px;
+            display: block;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ccc;
+            outline: 0;
+            border-radius: 5px;
+            background-color: #fff;
+            margin: 4px 0 18px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #333;
+            transition: all 0.5s;
+        }
+
+        /* Input Hover and Focus */
+        input:hover,
+        select:hover {
+            background-color: #f0f0f0;
+            border-color: #888;
+        }
+
+        input:focus,
+        select:focus {
+            border: 2px solid #000;
+            background-color: #e6e6e6;
+        }
+
+        /* Button Styling */
+        .login-btn {
+            width: 100%;
+            font-size: 0.9rem;
+            font-weight: bold;
+            padding: 10px 24px;
+            margin: 12px 0 24px;
+            border: 2px solid #6b7280;
+            border-radius: 5px;
+            background-color: #f6f6f6;
+            cursor: pointer;
+            transition: all 0.5s;
+        }
+
+        .login-btn:hover {
+            background-color: #000;
+            color: #eee;
+            transform: scale(1.05);
+        }
+
+        /* Links */
+        .links {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        a {
+            color: #000;
+            font-size: 0.88rem;
+            font-weight: 600;
+            transition: all 0.4s ease;
+        }
+
+        a:hover {
+            color: rgb(13, 133, 185);
+        }
+    </style>
+</head>
+
+<body>
+
+    <main>
+        <div class="left-side"></div>
+
+        <div class="right-side">
+            <div class="form-heading">Driver Registration Form</div>
+            <form id="driverForm">
+                <!-- License Details -->
+                <label for="license-number">License Number</label>
+                <input type="text" id="license-number" name="license-number" placeholder="Enter License Number" required>
+
+                <label for="license-image">Upload License Image</label>
+                <input type="file" id="license-image" name="license-image" accept="image/*" required>
+
+                <!-- Car Information -->
+                <label for="vehicle-model">Vehicle Model</label>
+                <input type="text" id="vehicle-model" name="vehicle-model" placeholder="Enter Vehicle Model" required>
+
+                <label for="vehicle-year">Vehicle Year</label>
+                <input type="number" id="vehicle-year" name="vehicle-year" placeholder="Enter Year" required>
+
+                <label for="vehicle-color">Vehicle Color</label>
+                <input type="text" id="vehicle-color" name="vehicle-color" placeholder="Enter Vehicle Color" required>
+
+                <label for="registration-number">Registration Number</label>
+                <input type="text" id="registration-number" name="registration-number" placeholder="Enter Registration Number" required>
+
+                <!-- Passenger Capacity -->
+                <label for="passenger-capacity">Passenger Capacity</label>
+                <input type="number" id="passenger-capacity" name="passenger-capacity" placeholder="Enter Maximum Capacity" required>
+
+                <!-- Pricing & Fare Setting -->
+                <label for="fare-setting">Fare Setting</label>
+                <select id="fare-setting" name="fare-setting" required>
+                    <option value="standard-fare">Standard Fare</option>
+                    <option value="bargaining-enabled">Enable Bargaining</option>
+                </select>
+
+                <button type="submit" class="login-btn">Register as Driver</button>
+                <div class="links">
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </form>
+        </div>
+
+    </main>
+    <script>
+        document.getElementById('driverForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    alert("You're successfully registered as a driver.");
+    // Redirect to the dashboard, specifically to the driver-dashboard section
+    window.location.href = "dashboard.html#driver-dashboard";
+});
+
+    </script>
+    
+
+</body>
+
+</html>
+
+

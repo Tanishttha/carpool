@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rider Registration and Ride Preferences</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap");
+
+        /* Basic Resets */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Quicksand", sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #fff;
+            padding: 20px;
+        }
+
+        main {
+            display: flex;
+            flex-direction: row;
+            background: #f0f4f8;
+            width: min(900px, 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.8s ease-in-out;
+            transform-style: preserve-3d;
+        }
+
+        main:hover {
+            transform: rotateY(-10deg) rotateX(5deg);
+        }
+
+        /* Left Side */
+        .left-side {
+            background-image: url('rider.jpeg');
+            background-size: cover;
+            background-position: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #fff;
+            text-align: center;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .left-side h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        .left-side p {
+            font-size: 1rem;
+            font-weight: 500;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Right Side */
+        .right-side {
+            flex: 1.5;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        label {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-top: 10px;
+            display: block;
+            color: #333;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            margin: 8px 0 20px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        input:hover, select:hover {
+            transform: scale(1.05);
+            border: 2px solid #6a89cc;
+            box-shadow: 0px 0px 8px rgba(106, 137, 204, 0.5);
+        }
+
+        /* Button */
+        .register-btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background: #6a89cc;
+            color: #fff;
+            border: none;
+            font-weight: 700;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .register-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0px 4px 8px rgba(106, 137, 204, 0.5);
+            background: #1e3c72;
+        }
+
+        /* Links */
+        .links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        a {
+            color: #333;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #6a89cc;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            main {
+                flex-direction: column;
+                transform: none;
+            }
+
+            .left-side {
+                order: 2;
+                padding: 30px;
+            }
+
+            .right-side {
+                order: 1;
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .left-side h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main>
+        <div class="left-side">
+            <h1>Welcome, Rider!</h1>
+            <p>Plan your commute with ease and connect with other riders.</p>
+        </div>
+
+        <div class="right-side">
+            <h2>Register and Set Ride Preferences</h2>
+            <form id="riderForm">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+                <label for="ride-frequency">Ride Frequency</label>
+                <select id="ride-frequency" name="ride-frequency" required>
+                    <option value="daily">Daily</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="occasionally">Occasionally</option>
+                </select>
+
+                <label for="pickup-time">Preferred Pickup Time</label>
+                <input type="time" id="pickup-time" name="pickup-time" required>
+
+                <label for="pickup-location">Pickup Location</label>
+                <input type="text" id="pickup-location" name="pickup-location" placeholder="e.g., University Area" required>
+
+                <label for="dropoff-location">Drop-off Location</label>
+                <input type="text" id="dropoff-location" name="dropoff-location" placeholder="e.g., Home Area" required>
+
+                <button type="submit" class="register-btn">Register as Rider</button>
+                <div class="links">
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('riderForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            alert(`Hello, ${name}! You're successfully registered.`);
+            // Redirect to the dashboard, specifically to the passenger-dashboard section
+            window.location.href = "dashboard.html#passenger-dashboard";
+        });
+    </script>
+    
+    
+</body>
+
+</html>
+
+

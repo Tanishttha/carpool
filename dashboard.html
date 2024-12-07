@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Carpooling</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <style>
+        /* Background and animations */
+        body {
+            font-family: 'Josefin Sans', sans-serif;
+            background: linear-gradient(135deg, #00b894, #00a8ff);
+            animation: gradient 5s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background: linear-gradient(135deg, #00b894, #00a8ff); }
+            50% { background: linear-gradient(135deg, #00a8ff, #00b894); }
+            100% { background: linear-gradient(135deg, #00b894, #00a8ff); }
+        }
+
+        /* Header styling */
+.header {
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    color: white;
+}
+
+/* Logo Container */
+.header .logo-container {
+    display: flex;
+    align-items: center;
+}
+
+/* Logo Image */
+.header .logo img {
+    width: 150px;
+}
+
+/* University Name */
+.header .university-name {
+    margin-left: 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+}
+
+/* Menu Styling */
+.header .menu {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Adds spacing between menu items */
+}
+
+/* Menu Links */
+.header .menu a {
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    background-color: #00a8ff;
+
+}
+
+/* Hover effect for Menu Links */
+.header .menu a:hover {
+    transform: scale(1.1);
+}
+
+/* Prevent background color change when the link is clicked */
+.header .menu a:active {
+    background-color: transparent; /* Keeps background static */
+    transform: scale(1); /* Prevents the scale effect on click */
+}
+
+
+/* Emergency Button Container */
+.emergency-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Emergency Button Styling */
+.emergency-button {
+    display: flex;
+    align-items: center;
+    padding: 15px 25px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    background-color: #ff4747;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    outline: none;
+}
+
+/* Emergency Icon */
+.emergency-icon {
+    font-size: 2rem;
+    margin-right: 10px;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effect for button */
+.emergency-button:hover {
+    background-color: #e63e3e;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 71, 71, 0.5);
+}
+
+/* Hover effect for the icon */
+.emergency-button:hover .emergency-icon {
+    transform: scale(1.2) rotate(360deg);
+    color: #fff;
+}
+
+/* Button click animation */
+.emergency-button:active {
+    transform: scale(0.95) rotate(10deg);
+    box-shadow: 0 0 20px rgba(255, 71, 71, 0.7);
+}
+
+/* Import FontAwesome for the icon */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
+
+        /* Main image section */
+        .bg-image {
+            background-image: url('students.jpg');
+            background-size: cover;
+            background-position: top;
+            height: 80vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Welcome section styling */
+        .welcome-section {
+            background: linear-gradient(135deg, #00b894, #00a8ff);
+            padding: 40px 0;
+            text-align: center;
+            color: white;
+        }
+
+        .welcome-section h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+            margin-bottom: 1.5rem;
+        }
+
+        .welcome-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .selection-btn {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            background-color: #00a8ff;
+            border-radius: 50px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+
+        .selection-btn:hover {
+            background-color: #ffffff;
+            color: #00a8ff;
+            transform: scale(1.05);
+        }
+        .passenger-dashboard {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+            padding: 30px;
+            color: white;
+            max-width: 700px;
+            margin: 30px auto;
+            text-align: center;
+            position: relative;
+        }
+
+        .passenger-dashboard img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .passenger-dashboard h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+            margin-bottom: 1.5rem;
+        }
+
+        .passenger-dashboard .btn {
+    width: 100%;
+    padding: 15px 0;
+    background: linear-gradient(45deg, #00a8ff, #005eff); /* Gradient background */
+    color: white;
+    font-weight: bold;
+    border-radius: 30px;
+    margin: 10px 0;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.3s ease, background-color 0.5s ease;
+    box-shadow: 0 4px 10px rgba(0, 168, 255, 0.4); /* Soft glow effect */
+    position: relative;
+    overflow: hidden; /* To contain hover effects */
+}
+
+.passenger-dashboard .btn::before {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 168, 255, 0.3), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s, transform 0.4s;
+    transform: scale(0);
+}
+
+.passenger-dashboard .btn:hover::before {
+    opacity: 1;
+    transform: scale(1.5); /* Expanding radial effect */
+}
+
+.passenger-dashboard .btn:hover {
+    background: linear-gradient(45deg, #005eff, #00a8ff); /* Reverse gradient */
+    color: white;
+    transform: scale(1.1); /* Slight enlargement on hover */
+    box-shadow: 0 6px 20px rgba(0, 168, 255, 0.5); /* Enhanced glow on hover */
+    animation: glow 1s infinite alternate; /* Subtle glowing animation */
+}
+
+/* Glow animation */
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+    }
+    100% {
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
+    }
+}
+
+/* Additional hover effect for text pop */
+.passenger-dashboard .btn:hover span {
+    display: inline-block;
+    transform: translateY(-3px); /* Slight pop-up text effect */
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Button active click effect */
+.passenger-dashboard .btn:active {
+    transform: scale(0.98); /* Shrink slightly on click */
+    box-shadow: 0 2px 8px rgba(0, 168, 255, 0.3); /* Reduced shadow for pressed effect */
+}
+
+.input-box {
+    display: flex;
+    align-items: center;
+    background: #ffffff; /* White background */
+    border-radius: 12px; /* Smooth rounded corners */
+    padding: 14px 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    border: 1px solid #d1d5db; /* Light gray border */
+    transition: all 0.3s ease-in-out;
+    position: relative; /* For internal animations */
+    overflow: hidden; /* Hide overflow for animation */
+}
+
+.input-box:hover {
+    border-color: #3b82f6; /* Blue border on hover */
+    box-shadow: 0 6px 15px rgba(59, 130, 246, 0.2); /* Slight blue glow */
+    transform: translateY(-2px); /* Subtle lift effect */
+}
+
+/* Add background glow effect */
+.input-box::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.2), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 0;
+}
+
+.input-box:hover::before {
+    opacity: 1;
+}
+
+.input-icon {
+    margin-right: 12px;
+    font-size: 18px;
+    color: #9ca3af; /* Icon color */
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    z-index: 1; /* Ensure it's above the glow effect */
+}
+
+.input-box:hover .input-icon {
+    color: #3b82f6; /* Blue icon color on hover */
+    transform: rotate(10deg); /* Add a slight rotation effect */
+}
+
+.input-select {
+    flex-grow: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 16px;
+    font-weight: 500;
+    color: #374151; /* Dark text */
+    z-index: 1; /* Ensure above the background effect */
+}
+
+.input-select::placeholder {
+    color: #9ca3af; /* Placeholder color */
+}
+
+/* Animation for the text appearing */
+.input-select:focus {
+    animation: focus-pulse 0.6s ease-in-out;
+}
+
+@keyframes focus-pulse {
+    0% {
+        background-color: rgba(59, 130, 246, 0.1);
+    }
+    100% {
+        background-color: transparent;
+    }
+}
+
+/* Button Styling */
+.btn {
+    padding: 15px 30px;
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+/* Wrapper for loading circle and text */
+#loading-wrapper {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.7); /* Transparent black background */
+}
+
+/* 3D Loading Circle Styling */
+.loading-circle {
+    width: 300px; /* Increased size of the circle */
+    height: 300px; /* Increased size of the circle */
+    border-radius: 50%;
+    background: conic-gradient(#ff6f61, #ffbb33, #4caf50, #00bcd4, #ff6f61);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 0 60px rgba(0, 0, 0, 0.2);
+    animation: rotate 4s linear infinite, scaleUp 4s ease-out infinite, colorChange 4s linear infinite;
+    transform-style: preserve-3d; /* To maintain 3D transformations */
+    transition: transform 1s ease-out;
+}
+
+/* Keyframes for rotation (360-degree rotation on Y and X axis) */
+@keyframes rotate {
+    0% {
+        transform: rotateY(0deg) rotateX(0deg);
+    }
+    50% {
+        transform: rotateY(180deg) rotateX(180deg);
+    }
+    100% {
+        transform: rotateY(360deg) rotateX(360deg);
+    }
+}
+
+/* Keyframes for scaling (expansion and contraction) */
+@keyframes scaleUp {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Keyframes for color change (smooth gradient color transition) */
+@keyframes colorChange {
+    0% {
+        background: conic-gradient(#ff6f61, #ffbb33, #4caf50, #00bcd4, #ff6f61);
+    }
+    25% {
+        background: conic-gradient(#ffbb33, #4caf50, #00bcd4, #ff6f61, #ffbb33);
+    }
+    50% {
+        background: conic-gradient(#4caf50, #00bcd4, #ff6f61, #ffbb33, #4caf50);
+    }
+    75% {
+        background: conic-gradient(#00bcd4, #ff6f61, #ffbb33, #4caf50, #00bcd4);
+    }
+    100% {
+        background: conic-gradient(#ff6f61, #ffbb33, #4caf50, #00bcd4, #ff6f61);
+    }
+}
+
+/* Text styling for loading text */
+#loading-text {
+    font-size: 30px; /* Increased font size */
+    color: white;
+    font-weight: bold; /* Made the text bold */
+    margin-top: 30px;
+    animation: fadeInText 4s ease-in-out;
+}
+
+/* Fade-in animation for loading text */
+@keyframes fadeInText {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+        /* Driver Dashboard Styling */
+        .driver-dashboard {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+            padding: 30px;
+            color: white;
+            max-width: 700px;
+            margin: 30px auto;
+            text-align: center;
+        }
+
+        .driver-dashboard img {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .driver-dashboard h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+            margin-bottom: 1.5rem;
+        }
+
+        .driver-dashboard .btn {
+            width: 100%;
+            padding: 15px 0;
+            background-color: #00a8ff;
+            color: white;
+            font-weight: bold;
+            border-radius: 30px;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .driver-dashboard .btn:hover {
+            background-color: white;
+            color: #00a8ff;
+            transform: scale(1.05);
+        }
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%236B7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.5em;
+        }
+
+        select:hover {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transform: scale(1.02);
+        }
+
+        select:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+        }
+
+        /* Smooth Transitions */
+        .transition-all {
+            transition: all 0.3s ease;
+        }
+        .why-carpooling-heading {
+    font-size: 3rem;
+    color: #ff6347; /* Tomato color */
+    text-align: center;
+    margin: 40px 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px #000, 4px 4px 10px rgba(0, 0, 0, 0.5);
+    letter-spacing: 2px;
+    transform: perspective(500px) rotateX(10deg);
+}
+
+
+        .fact-box {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .fact-box:hover {
+            transform: scale(1.03);
+        }
+
+        .fact-box h3 {
+            font-size: 1.2em;
+            color: #004c99;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .fact-box p {
+            color: #333;
+            font-size: 0.95em;
+            line-height: 1.6em;
+            margin-top: 10px;
+        }
+
+        .fact-box .more-content {
+            display: none;
+        }
+
+        .fact-box.open .more-content {
+            display: inline;
+        }
+
+        .fact-box button {
+            background: none;
+            border: none;
+            color: #004c99;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0;
+            position: absolute;
+            right: 20px;
+            bottom: 15px;
+            font-size: 0.9em;
+        }
+        /* Footer styling */
+.footer {
+    background-color: #333;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.social-media-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.social-icon {
+    font-size: 2rem;
+    color: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.social-icon:hover {
+    transform: translateY(-10px) rotate(10deg);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* 3D animation effect */
+.social-icon.fb-icon {
+    animation: rotate3d 1s infinite alternate;
+}
+
+.social-icon.twitter-icon {
+    animation: rotate3d 1.2s infinite alternate;
+}
+
+.social-icon.instagram-icon {
+    animation: rotate3d 1.4s infinite alternate;
+}
+
+.social-icon.linkedin-icon {
+    animation: rotate3d 1.6s infinite alternate;
+}
+
+@keyframes rotate3d {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
+}
+footer p {
+    font-size: 0.9rem;
+    color: #bbb;
+    margin-top: 20px;
+    letter-spacing: 0.5px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* More subtle hover effect for copyright text */
+footer p:hover {
+    color: white;
+    transition: color 0.3s ease;
+}
+
+/* Adding smooth transition for social icons and hover effect */
+@keyframes rotate3d {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="logo-container">
+        <div class="logo">
+            <img src="https://jcboseust.ac.in/assets/uploads/media/be5cb2dc7f8445c5b3dc7d814be25bc9.png" alt="J.C. Bose University Logo">
+        </div>
+        <div class="university-name">J.C. Bose University of Science and Technology, YMCA, Faridabad, Haryana - 121006</div>
+    </div>
+    <div class="menu">
+        <a href="home.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact Us</a>
+    </div>
+    
+        <div class="emergency-button-container">
+            <button class="emergency-button" onclick="window.location.href='need.html'">
+                <i class="fas fa-exclamation-triangle emergency-icon"></i>
+                Need Help
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- Main Image Section -->
+<section class="bg-image"></section>
+
+<!-- Welcome Section -->
+<section class="welcome-section">
+    <div class="text-center">
+        <h1>Welcome to University Carpooling</h1>
+        <p>Join hands to make commuting easier and eco-friendly for everyone!</p>
+        <div>
+            <button class="selection-btn" onclick="window.location.href='driver_register.html'">I am a Driver</button>
+            <button class="selection-btn" onclick="window.location.href='rider.html'">I am a Passenger</button>
+        </div>
+    </div>
+</section>
+
+<main class="container mx-auto p-6">
+
+    <!-- Passenger Dashboard -->
+    <section id="passenger-dashboard" class="passenger-dashboard">
+        <img src="wait.jpg" alt="Passenger Waiting">
+        <h2>Passenger Dashboard</h2>
+    
+
+    <!-- Form Section -->
+    <div class="mt-10 bg-white p-8 rounded-lg shadow-xl w-96">
+        <!-- Enter Location -->
+        <div class="mb-6">
+            <div class="input-box">
+                <span class="input-icon">📍</span>
+                <select class="input-select" id="enter-location">
+                    <option disabled selected hidden>Enter location</option>
+                    <option value="university">University</option>
+                    <option value="delhi">Delhi</option>
+                    <option value="gurugram">Gurugram</option>
+                    <option value="noida">Noida</option>
+                    <option value="faridabad">Faridabad</option>
+                    <option value="palwal">Palwal</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- Enter Destination -->
+        <div class="mb-6">
+            <div class="input-box">
+                <span class="input-icon">🎯</span>
+                <select class="input-select" id="enter-destination">
+                    <option disabled selected hidden>Enter destination</option>
+                    <option value="university">University</option>
+                    <option value="delhi">Delhi</option>
+                    <option value="gurugram">Gurugram</option>
+                    <option value="noida">Noida</option>
+                    <option value="faridabad">Faridabad</option>
+                    <option value="palwal">Palwal</option>
+                </select>
+            </div>
+        </div>
+    
+        <button class="btn" onclick="startSearch()">Search Ride</button>
+
+        <!-- Loading animation -->
+        <div id="loading-wrapper">
+            <div id="loading" class="loading-circle"></div>
+            <div id="loading-text">Finding nearby rides...</div>
+        </div>
+        <button class="btn" onclick="window.location.href='messenger.html'">Chat with Driver</button>
+        <button class="btn" onclick="window.location.href='payments.html'">Make Payments</button>
+    </section>
+
+    <!-- Driver Dashboard -->
+    <section id="driver-dashboard" class="driver-dashboard">
+        <img src="driver.jpg" alt="Driver Dashboard Image">
+        <h2>Driver Dashboard</h2>
+        <button class="btn" onclick="window.location.href='bookings.html'">View Bookings</button>
+        <button class="btn" onclick="window.location.href='offer_ride.html'">Offer a Ride</button>
+        <button class="btn" onclick="window.location.href='message_driver.html'">Chat with Rider</button>
+    </section>
+
+    <!-- Why Carpooling Heading -->
+    <section class="why-carpooling-section">
+        <h2 class="why-carpooling-heading">Why Carpooling?</h2>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="fact-box-container">
+        <div class="fact-box">
+            <h3>Affordable and Convenient</h3>
+            <p>Traveling by carpool is often more budget-friendly, especially for longer trips.</p>
+            <div class="more-content">
+                <p>By sharing the ride, you share the cost, helping everyone save on fuel, tolls, and parking fees.</p>
+            </div>
+            <button onclick="toggleContent(this)">Read More</button>
+        </div>
+
+        <div class="fact-box">
+            <h3>Safer and Reliable Option</h3>
+            <p>With fewer people in the car, carpooling offers a safer, low-contact travel alternative. Plus, our platform prioritizes</p>
+            <div class="more-content">
+                <p>member safety with identity verification, profile reviews, and secure booking for added peace of mind.</p>
+            </div>
+            <button onclick="toggleContent(this)">Read More</button>
+        </div>
+
+        <div class="fact-box">
+            <h3>Flexible Pricing Options</h3>
+            <p>Carpool ride costs vary based on factors like distance, departure time, and demand. Drivers set their own rates per seat,</p>
+            <div class="more-content">
+                <p>so you can pick a ride that best fits your budget. Check out our top routes to get an idea of the prices available.</p>
+            </div>
+            <button onclick="toggleContent(this)">Read More</button>
+        </div>
+
+        <div class="fact-box">
+            <h3>Arrive On Time and Stay Connected</h3>
+            <p>Carpooling can save you time by avoiding delays often associated with public transport. It’s also a great way</p>
+            <div class="more-content">
+                <p>to meet new people, make connections, and have interesting conversations during your journey.
+                </p>
+            </div>
+            <button onclick="toggleContent(this)">Read More</button>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer py-10 bg-gray-900 text-white">
+        <div class="container mx-auto text-center">
+            <h3 class="text-2xl mb-6">Connect with us</h3>
+            <div class="social-icons space-x-6">
+                <a href="#" class="social-icon p-6 bg-blue-600 hover:bg-blue-800 rounded-full transform transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-blue-600">
+                    <i class="fab fa-facebook-f text-4xl"></i>
+                </a>
+                <a href="#" class="social-icon p-6 bg-blue-400 hover:bg-blue-600 rounded-full transform transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-blue-400">
+                    <i class="fab fa-twitter text-4xl"></i>
+                </a>
+                <a href="#" class="social-icon p-6 bg-pink-600 hover:bg-pink-800 rounded-full transform transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-pink-600">
+                    <i class="fab fa-instagram text-4xl"></i>
+                </a>
+                <a href="#" class="social-icon p-6 bg-red-600 hover:bg-red-800 rounded-full transform transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-red-600">
+                    <i class="fab fa-youtube text-4xl"></i>
+                </a>
+                <a href="#" class="social-icon p-6 bg-gray-800 hover:bg-gray-600 rounded-full transform transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-gray-600">
+                    <i class="fab fa-linkedin-in text-4xl"></i>
+                </a>
+            </div>
+        </div>
+        <p class="text-sm mt-8 opacity-75">
+            Copyright &copy; 2024 All Rights Reserved.
+        </p>
+    </footer>
+</main>
+
+<script>
+    function toggleContent(button) {
+        const factBox = button.closest('.fact-box');
+        factBox.classList.toggle('open');
+    }
+    function startSearch() {
+    // Show the loading animation and text
+    document.getElementById("loading-wrapper").style.display = "flex";
+
+    // After 4 seconds, redirect to the find_ride.html page
+    setTimeout(function() {
+        window.location.href = 'find_ride.html';
+    }, 3000);  // Adjusted to 4 seconds to match the loading animation duration
+}
+
+    
+    </script>
+
+</body>
+</html>
+
+
+
+
