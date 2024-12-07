@@ -1,139 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Carpooling AI Alerts</title>
+  <title>AI-Powered Alerts</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f9;
-      margin: 0;
-      padding: 0;
+    @keyframes slideIn {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
 
-    .header {
-      background-color: #4CAF50;
-      color: white;
-      text-align: center;
-      padding: 1em 0;
-      font-size: 24px;
+    .slide-in {
+      animation: slideIn 0.5s ease-out forwards;
     }
 
-    .container {
-      padding: 20px;
-      max-width: 600px;
-      margin: auto;
-      background: #fff;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
 
-    .alert-box {
-      border: 1px solid #ddd;
-      padding: 15px;
-      border-radius: 5px;
-      margin-bottom: 20px;
-      background: #f9f9f9;
-      display: none;
-    }
-
-    .alert-box.weather {
-      border-left: 5px solid #2196F3;
-    }
-
-    .alert-box.traffic {
-      border-left: 5px solid #FF9800;
-    }
-
-    .alert-box .title {
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-
-    .alert-box .message {
-      font-size: 14px;
-    }
-
-    .button {
-      display: inline-block;
-      padding: 10px 15px;
-      background-color: #4CAF50;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-      cursor: pointer;
-      text-align: center;
-    }
-
-    .button:hover {
-      background-color: #45a049;
+    .fade-in {
+      animation: fadeIn 0.8s ease-in forwards;
     }
   </style>
 </head>
-<body>
-  <div class="header">AI-Powered Traffic & Weather Alerts</div>
-  <div class="container">
-    <h2>Check for Alerts</h2>
-    <p>Click the button below to get real-time traffic and weather updates for your route.</p>
-    <button class="button" onclick="getAlerts()">Get AI Alerts</button>
 
-    <div class="alert-box weather" id="weather-alert">
-      <div class="title">Weather Alert</div>
-      <div class="message"></div>
+<body class="bg-gradient-to-br from-blue-50 to-gray-100 min-h-screen flex flex-col justify-between">
+  <!-- Header -->
+  <header class="bg-gradient-to-r from-green-500 to-teal-500 text-white py-6 text-center shadow-lg">
+    <h1 class="text-3xl font-extrabold tracking-wider">AI-Powered Traffic & Weather Alerts</h1>
+    <p class="text-sm font-light mt-2">Stay updated with real-time alerts for your route</p>
+  </header>
+
+  <!-- Main Container -->
+  <main class="container mx-auto px-4 py-8">
+    <section class="bg-white shadow-lg rounded-lg p-6 mb-8 slide-in">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">Check for Alerts</h2>
+      <p class="text-gray-600 mb-6">Click the button below to get AI-driven, real-time traffic and weather updates.</p>
+      <button 
+        class="bg-gradient-to-r from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 text-white font-bold py-3 px-6 rounded-full shadow-md hover:shadow-lg focus:outline-none focus:ring focus:ring-green-200 transition transform hover:scale-105"
+        onclick="getAlerts()">
+        Get AI Alerts
+      </button>
+    </section>
+
+    <!-- Weather Card -->
+    <div id="weather-alert" class="hidden">
+      <div class="bg-blue-50 border-l-4 border-blue-500 shadow-md rounded-lg p-6 slide-in">
+        <h3 class="text-lg font-bold text-blue-500 mb-2 flex items-center">
+          <span class="material-icons-outlined mr-2">cloud</span> Weather Alert
+        </h3>
+        <p class="text-gray-700 message"></p>
+      </div>
     </div>
 
-    <div class="alert-box traffic" id="traffic-alert">
-      <div class="title">Traffic Alert</div>
-      <div class="message"></div>
+    <!-- Traffic Card -->
+    <div id="traffic-alert" class="hidden mt-6">
+      <div class="bg-yellow-50 border-l-4 border-yellow-500 shadow-md rounded-lg p-6 fade-in">
+        <h3 class="text-lg font-bold text-yellow-500 mb-2 flex items-center">
+          <span class="material-icons-outlined mr-2">traffic</span> Traffic Alert
+        </h3>
+        <p class="text-gray-700 message whitespace-pre-line"></p>
+      </div>
     </div>
-  </div>
-
-  <script>
-    function getAlerts() {
-  const openWeatherApiKey = '05636943fe4ff91f0838ff7ebdf91ce8'; // Replace with your actual API key
-  const city = 'London'; // Example city, replace with dynamic input if needed
-  const trafficApiUrl = 'https://api.trafficservice.com/v1/alerts'; // Replace with your traffic API endpoint
-  const weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${openWeatherApiKey}&units=metric`;
-
-  // Fetch weather data
-  fetch(weatherApiUrl)
-    .then(response => response.json())
-    .then(data => {
-      const weatherAlertBox = document.getElementById('weather-alert');
-      const weatherDescription = data.weather[0].description; // Get the weather description
-      const weatherMessage = `Weather: ${weatherDescription}, Temperature: ${data.main.temp}°C`;
-      
-      weatherAlertBox.querySelector('.message').textContent = weatherMessage;
-      weatherAlertBox.style.display = 'block';
-    })
-    .catch(error => {
-      console.error('Weather API Error:', error);
-      const weatherAlertBox = document.getElementById('weather-alert');
-      weatherAlertBox.querySelector('.message').textContent = 'Unable to fetch weather data.';
-      weatherAlertBox.style.display = 'block';
-    });
-
-  // Fetch traffic data
-  fetch(trafficApiUrl)
-    .then(response => response.json())
-    .then(data => {
-      const trafficAlertBox = document.getElementById('traffic-alert');
-      const trafficMessage = data.alerts.length > 0 
-        ? `Traffic Alert: ${data.alerts[0].message}` 
-        : "No traffic alerts. All roads clear.";
-        
-      trafficAlertBox.querySelector('.message').textContent = trafficMessage;
-      trafficAlertBox.style.display = 'block';
-    })
-    .catch(error => {
-      console.error('Traffic API Error:', error);
-      const trafficAlertBox = document.getElementById('traffic-alert');
-      trafficAlertBox.querySelector('.message').textContent = 'Unable to fetch traffic data.';
-      trafficAlertBox.style.display = 'block';
-    });
-}
-
-  </script>
+  </main>
 </body>
+
+<!-- Script -->
+<script>
+  async function getAlerts() {
+    const openWeatherApiKey = '05636943fe4ff91f0838ff7ebdf91ce8';
+    const lat = 28.403131;
+    const lon = 77.287636;
+    const weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${openWeatherApiKey}&units=metric`;
+
+    // Show loading feedback
+    const button = document.querySelector("button");
+    button.textContent = "Fetching AI Alerts...";
+    button.classList.add("animate-pulse");
+
+    // Fetch weather data
+    fetch(weatherApiUrl)
+      .then(response => response.json())
+      .then(data => {
+        const weatherAlertBox = document.getElementById('weather-alert');
+        const weatherDescription = data.weather[0].description;
+        const temperature = data.main.temp;
+        const weatherMessage = `Weather: ${weatherDescription}, Temperature: ${temperature}°C`;
+
+        weatherAlertBox.querySelector('.message').textContent = weatherMessage;
+        weatherAlertBox.classList.remove('hidden');
+      })
+      .catch(error => {
+        console.error('Weather API Error:', error);
+        const weatherAlertBox = document.getElementById('weather-alert');
+        weatherAlertBox.querySelector('.message').textContent = 'Unable to fetch weather data.';
+        weatherAlertBox.classList.remove('hidden');
+      });
+
+    // Mock traffic data
+    const trafficAlertBox = document.getElementById('traffic-alert');
+    const mockTrafficData = {
+      alerts: [
+        { message: 'Accident reported near Sector 59. Expect delays.' },
+        { message: 'Heavy traffic in Sector 29 due to construction.' }
+      ]
+    };
+
+    if (mockTrafficData.alerts.length > 0) {
+      let trafficMessage = '';
+      mockTrafficData.alerts.forEach(alert => {
+        trafficMessage += `${alert.message}\n`;
+      });
+      trafficAlertBox.querySelector('.message').textContent = trafficMessage;
+    } else {
+      trafficAlertBox.querySelector('.message').textContent = 'No traffic alerts. Roads are clear.';
+    }
+
+    trafficAlertBox.classList.remove('hidden');
+
+    // Reset button feedback
+    button.textContent = "Get AI Alerts";
+    button.classList.remove("animate-pulse");
+  }
+</script>
+
+<!-- Material Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 </html>
+
