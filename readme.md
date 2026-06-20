@@ -24,52 +24,42 @@ The platform enables users to register as drivers or passengers, search for avai
 * Secure Login System
 * Passenger and Driver Profiles
 * Session Management
-
-Ride Management
+<h4>Ride Management</h4>
 
 * Offer a Ride
 * Find Available Rides
 * View Ride Details
 * Manage Ride Requests
-
-Driver Module
+<h4>Driver Module</h4>
 
 * Driver Registration
 * Driver Information Management
 * Ride Availability Updates
 * Passenger Request Handling
-
-Passenger Module
+<h4>Passenger Module</h4>
 
 * Search Available Rides
 * Send Ride Requests
 * View Driver Details
 * Booking Management
-
-Communication System
+<h4>Communication System</h4>
 
 * Driver-Passenger Messaging
 * Ride Coordination Support
 * User Interaction Interface
-
-Payment Interface
+<h4>Payment Interface</h4>
 
 * Payment Gateway Simulation
 * Multiple Payment Options
 * Transaction Interface
-
-Dashboard
+<h4>Dashboard</h4>
 
 * User Dashboard
 * Ride History
 * Booking Overview
 * Request Management
-
-⸻
-
-Technology Stack
-
-Frontend
+<h3>Technology Stack</h3>
+<h4>Frontend</h4>
 
 * HTML5
 * CSS3
