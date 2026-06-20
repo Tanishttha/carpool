@@ -1,55 +1,103 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const bodyParser = require("body-parser");
+const path = require("path");
 
 const app = express();
-const port = 3000;
 
-// Middleware to parse JSON data
 app.use(bodyParser.json());
+app.use(express.static(__dirname));
 
-let users = []; // This will store users (in-memory for now)
+let users = [];
 
-// Endpoint to register a user
+// Home Page
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "index.html"));
+});
+
+// Register User
 app.post("/register", async (req, res) => {
-    const { name, email, password } = req.body;
+    try {
+        const { name, email, password } = req.body;
 
-    // Check if user already exists
-    const existingUser = users.find(user => user.email === email);
-    if (existingUser) {
-        return res.status(400).json({ message: "User already exists!" });
+        const existingUser = users.find(
+            (user) => user.email === email
+        );
+
+        if (existingUser) {
+            return res.status(400).json({
+                message: "User already exists!"
+            });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        users.push({
+            name,
+            email,
+            password: hashedPassword
+        });
+
+        return res.status(200).json({
+            message: "Registration successful"
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            message: "Server error",
+            error: error.message
+        });
     }
-
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Save the user data (for now, we're storing it in-memory)
-    users.push({ name, email, password: hashedPassword });
-
-    return res.status(200).json({ message: "Registration successful" });
 });
 
-// Endpoint to verify login credentials
+// Login User
 app.post("/login", async (req, res) => {
-    const { email, password } = req.body;
+    try {
+        const { email, password } = req.body;
 
-    // Find the user by email
-    const user = users.find(user => user.email === email);
-    if (!user) {
-        return res.status(400).json({ message: "User not found" });
+        const user = users.find(
+            (user) => user.email === email
+        );
+
+        if (!user) {
+            return res.status(400).json({
+                message: "User not found"
+            });
+        }
+
+        const isMatch = await bcrypt.compare(
+            password,
+            user.password
+        );
+
+        if (!isMatch) {
+            return res.status(400).json({
+                message: "Invalid credentials"
+            });
+        }
+
+        return res.status(200).json({
+            message: "Login successful",
+            redirect: "dashboard.html"
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            message: "Server error",
+            error: error.message
+        });
     }
-
-    // Compare the entered password with the stored password
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-        return res.status(400).json({ message: "Invalid credentials" });
-    }
-
-    // If password matches, redirect to dashboard
-    res.status(200).json({ message: "Login successful", redirect: "dashboard.html" });
 });
 
-// Start the server
-app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
+// Health Check
+app.get("/health", (req, res) => {
+    res.json({
+        status: "running"
+    });
+});
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
