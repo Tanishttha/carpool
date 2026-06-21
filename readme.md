@@ -215,10 +215,7 @@ Expected Outcomes
 * Better utilization of vehicle capacity.
 * Environmentally sustainable transportation.
 * Enhanced commuter convenience.
-
-⸻
-
-Future Enhancements
+<h2>Future Enhancements</h2>
 
 * Real-Time GPS Tracking
 * Live Ride Matching
