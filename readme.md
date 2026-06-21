@@ -246,9 +246,5 @@ Institution: J.C. Bose University of Science and Technology, YMCA
 ```bash
 https://carpool-ymca.vercel.app
 ```
-
-⸻
-
-License
-
+<h2>License</h2>
 This project was developed for academic and educational purposes.
