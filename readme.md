@@ -17,7 +17,7 @@ The platform enables users to register as drivers or passengers, search for avai
 * Improve accessibility and convenience for daily transportation.
 * Create a secure and user-friendly ride booking experience.
 
-![System Architecture](../assets/1.png)
+![System Architecture](assets/1.png)
 <h2>Key Features</h2>
 <h3>User Authentication</h3>
 
@@ -75,7 +75,7 @@ The platform enables users to register as drivers or passengers, search for avai
 * Vercel
 <br>
 
-![Project Structure](../assets/2.png)
+![Project Structure](assets/2.png)
 <h2>Installation</h2>
 <h3>Clone Repository</h3>
 

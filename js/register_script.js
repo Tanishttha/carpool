@@ -24,7 +24,7 @@ document.getElementById('registrationForm').addEventListener('submit', function(
     localStorage.setItem('user', JSON.stringify(user));
     document.getElementById('popup').style.display = 'block';
     setTimeout(function() {
-        window.location.href = 'html/login.html';
+        window.location.href = 'login.html';
     }, 2000); 
 });
 
