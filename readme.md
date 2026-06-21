@@ -90,7 +90,7 @@ cd carpool
 <h3>Then open:</h3>
 
 ```bash
-http://localhost:8000
+http://localhost:5500
 ```
 <h2>Modules</h2>
 <h3>Home Module</h3>
