@@ -9,7 +9,7 @@ The Carpooling Platform is a web-based ride-sharing application designed to help
 The platform enables users to register as drivers or passengers, search for available rides, offer rides to others, communicate with fellow users, and manage bookings through a user-friendly interface.
 </p>
 
-<h3>Objectives</h3>
+<h2>Objectives</h2>
 
 * Provide an efficient ride-sharing platform for students and commuters.
 * Reduce individual transportation costs through shared travel.
