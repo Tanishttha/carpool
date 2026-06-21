@@ -63,7 +63,6 @@
       </div>
     </div>
 
-    <!-- Traffic Card -->
     <div id="traffic-alert" class="hidden mt-6">
       <div class="bg-yellow-50 border-l-4 border-yellow-500 shadow-md rounded-lg p-6 fade-in">
         <h3 class="text-lg font-bold text-yellow-500 mb-2 flex items-center">
@@ -75,7 +74,6 @@
   </main>
 </body>
 
-<!-- Script -->
 <script>
   async function getAlerts() {
     const openWeatherApiKey = '05636943fe4ff91f0838ff7ebdf91ce8';
@@ -83,12 +81,10 @@
     const lon = 77.287636;
     const weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${openWeatherApiKey}&units=metric`;
 
-    // Show loading feedback
     const button = document.querySelector("button");
     button.textContent = "Fetching AI Alerts...";
     button.classList.add("animate-pulse");
 
-    // Fetch weather data
     fetch(weatherApiUrl)
       .then(response => response.json())
       .then(data => {
@@ -107,7 +103,6 @@
         weatherAlertBox.classList.remove('hidden');
       });
 
-    // Mock traffic data
     const trafficAlertBox = document.getElementById('traffic-alert');
     const mockTrafficData = {
       alerts: [
@@ -128,13 +123,11 @@
 
     trafficAlertBox.classList.remove('hidden');
 
-    // Reset button feedback
     button.textContent = "Get AI Alerts";
     button.classList.remove("animate-pulse");
   }
 </script>
 
-<!-- Material Icons -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 </html>
 
