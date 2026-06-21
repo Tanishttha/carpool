@@ -59,23 +59,19 @@ The platform enables users to register as drivers or passengers, search for avai
 * Booking Overview
 * Request Management
 <h2>Technology Stack</h2>
-<h4>Frontend</h4>
+<h3>Frontend</h3>
 
 * HTML5
 * CSS3
 * JavaScript
-
-Development Tools
+<h3>Development Tools</h3>
 
 * Visual Studio Code
 * Git
 * GitHub
-
-Deployment
+<h3>Deployment</h3>
 
 * Vercel
-
-⸻
 
 System Architecture
 
