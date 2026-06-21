@@ -8,7 +8,7 @@
 body.login-page {
     width: 100vw;
     height: 100vh;
-    background: url("./back_car.gif") no-repeat center center fixed;
+    background: url("assets/back_car.gif") no-repeat center center fixed;
     background-size: cover;
     display: flex;
     align-items: center;
