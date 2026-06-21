@@ -229,11 +229,12 @@ Future Enhancements
 * AI-Based Ride Recommendations
 * Route Optimization Algorithms
 <h2>Academic Information</h2>
-Project Type: Capstone Project
-Semester: 3rd Semester
-Course: Computer Engineering
-Technology Used: HTML, CSS, JavaScript
-Institution: J.C. Bose University of Science and Technology, YMCA
+
+* Project Type: Capstone Project
+* Semester: 3rd Semester
+* Course: Computer Engineering
+* Technology Used: HTML, CSS, JavaScript
+* Institution: J.C. Bose University of Science and Technology, YMCA
 <h2>Live Demo</h2>
 
 ```bash
